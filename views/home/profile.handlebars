@@ -1,0 +1,464 @@
+<body onload="checkContainer('{{email}}','{{itemsString}}')">
+<script>
+
+function readMore(id)
+{
+document.getElementById("comments").innerHTML="<br><h5>Comments</h5><br>";
+var name=""+id+".txt";
+$.post("https://adityabalaji02.000webhostapp.com/2.php",{filename:name},function(data){
+
+    var comments=data.split("|");
+    document.getElementById("long_desc").innerHTML=comments[1];
+    for(i=2;i<comments.length;i++)
+    {
+      var div=document.createElement("div");
+
+      div.innerHTML=comments[i]+"<br>";
+      document.getElementById("comments").appendChild(div);
+
+    }
+
+    });
+$("#readMore").modal('open');
+}
+
+
+function backToItems()
+{
+  window.location.href="/1";
+}
+var gi="";
+var email2="";
+function checkContainer (email,itemsString) {
+if(gi=="")
+{
+gi=""+itemsString;
+email2=email;
+}
+var string=gi;
+var item1=string[0];
+
+ if(item1)
+ {
+ var id="#comments"+item1;
+ 
+  if($(id).is(':visible')){ //if the container is visible on the page
+    readFiles(email2,gi);  
+  } else {
+    setTimeout(checkContainer, 50); //wait 50 ms, then try again
+  }
+ }
+}
+var len=0;
+var commentLines=[];
+var commentLines2=[];
+var items=[];
+var X=1;
+function readFiles(email,itemsString)
+{
+  var longDescriptions=[];
+  var userComments=[];
+  
+  var cis=[];
+  items=itemsString.split(",");
+  len=items.length-1;
+  
+  for(i=0;i<items.length-1;i++)
+  {
+    var name=""+items[i]+".txt";
+    console.log(name);
+    var index=Number(items[i]);
+    var itemId=""+items[i];
+    $.post("https://adityabalaji02.000webhostapp.com/2.php",{filename:name},function(data){
+
+    var comments=data.split("|");
+
+
+    
+    commentLines.push(comments);
+    
+
+    });
+  }
+checkLen();
+}
+function checkLen()
+{
+  if(commentLines.length==len)
+  {
+    assignVals(commentLines,items);
+  }
+  else
+    setTimeout(checkLen,50);
+}
+function assignVals(commentLines,items)
+{
+//alert(commentLines);
+  for(i=0;i<len;i++)
+  {
+var index=Number(commentLines[i][0]);
+//alert(index+" "+commentLines[i]);
+    for(j=2;j<commentLines[i].length-1;j++)
+    {
+    
+
+      var parts=commentLines[i][j].split(":");
+     
+      if(parts[0]==email2)
+      {
+        
+        
+        var ci=""+index;
+        var id="comments"+ci;
+        console.log(ci);
+        document.getElementById(id).value=parts[1];
+        document.getElementById(id).innerHTML=parts[1];
+
+      }
+    }
+  }
+}
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,interval:100000});
+                $('.slider').slider('pause');
+            });
+            function fn1(ele,url)
+            {
+            var image=new Image();
+            image.onload=function(){
+            	ele.setAttribute("src",url);
+            };
+            image.src=url;
+            }
+
+
+function checkLen2()
+{
+console.log(commentLines2.length+"kk"+len);
+  if(commentLines2.length==len)
+  {
+    assignVals2(commentLines2,items);
+  }
+  else
+    setTimeout(checkLen2,50);
+}
+
+var toWrite=[];
+function assignVals2(commentLines,items)
+{
+var f=0;
+  for(i=0;i<len;i++)
+  {
+var index=Number(commentLines[i][0]);
+f=0;
+var ci=""+index;
+var id="comments"+ci;
+toWrite[i]=""+commentLines[i][0]+"|"+commentLines[i][1]+"|";
+    for(j=2;j<commentLines[i].length-1;j++)
+    {
+    
+
+      var parts=commentLines[i][j].split(":");
+     
+      if(parts[0]==email2)
+      {
+      
+        
+        console.log(ci);
+        document.getElementById(id).innerHTML=document.getElementById(id).value;
+        var newPart=document.getElementById(id).innerHTML;
+        //alert(newPart);
+        commentLines[i][j]=email2+":"+newPart;
+        f=1;
+      }
+    toWrite[i]+=commentLines[i][j]+"|";
+    }
+
+    if(f==0)
+    {
+      
+      commentLines[i][j]=""+email2+":"+document.getElementById(id).value;
+      toWrite[i]+=commentLines[i][j]+"|";
+    }
+
+  }
+writeFile();
+}
+
+function writeFile()
+{
+var json={};
+json["len"]=items.length-1;
+ for(i=0;i<items.length-1;i++)
+ {
+  var name_i=""+toWrite[i][0]+".txt";
+  json["name"+i]=name_i;
+  json["text"+i]=toWrite[i];
+    
+ } 
+
+ $.post("https://adityabalaji02.000webhostapp.com/1.php",json,function(data){
+ 
+ $.post("/saveRatings",$('#fb').serialize(),function(data2){
+ 
+ 
+    });
+    });
+}
+
+function getOld(event,email,itemsString)
+{
+event.preventDefault();
+items=itemsString.split(",");
+  len=items.length-1;
+for(i=0;i<items.length-1;i++)
+{
+var name=""+items[i]+".txt";
+$.post("https://adityabalaji02.000webhostapp.com/2.php",{filename:name},function(data){
+
+    var comments=data.split("|");
+
+
+    
+    commentLines2.push(comments);
+    
+
+    });
+  
+
+}
+checkLen2();
+return false; 
+}
+
+
+function openRatings()
+{
+  $("#ratings").modal('open');
+}
+        
+
+function left()
+{
+	$('.slider').slider('prev');
+}
+function right()
+{
+	$('.slider').slider('next');
+}
+function showSideNav()
+{
+	$('#collapse2').sideNav('show');
+}
+</script>
+<img src="images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="images/logo.png"></a>
+      <a href="/{{active_category.cid}}" class="brand-logo center" id="bname" style="letter-spacing:2px">Profile & Recommendations</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="waves-effect waves-light btn-flat large" href="/mycart" style="background-color:#cfd8dc;color:black">Your Cart</a></li>
+        	<li><a class="waves-effect waves-light btn-flat large" href="/profile" style="background-color:#cfd8dc;color:black">{{name}}</a></li>
+         <li><a class="waves-effect waves-light btn-flat large" href="/logout" style="background-color:#cfd8dc;color:black">Logout</a></li>
+      </ul>
+      </div>
+</nav>
+<br>
+
+
+
+<div class="row center-align s12">
+<div class="col s3 offset-s4">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="openRatings()"><a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">RATE YOUR PURCHASES</a></button>
+</div>
+<div class="col s2">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="backToItems()">BACK</button>
+</div>
+</div>
+
+
+<br><br>
+<a href="#" data-activates="slide-out" id="collapse2" class="button-collapse"></a>
+<ul id="slide-out" class="side-nav">
+    
+   
+    <li><a href="/" class="center-align">Categories</a></li>
+    {{#each categories}}
+    <li><a class="waves-effect" href={{cid}}>{{cname}}</a></li>
+    {{/each}}
+  </ul>
+  <div class="row">
+  <div class="col s3 offset-m1" style="border:1px solid white">
+
+                <h5 class="center-align flow-text" style="letter-spacing:2px;color:#fafafa;opacity:0.5">
+                <u>YOUR DETAILS</u> <br> <br>
+                First name: {{first_name}}
+                <br>
+                <br>
+                Last name: {{last_name}}
+                <br><br>
+                Email: {{email}}</h5>
+                </div>
+
+        <div class="slider">
+
+            <ul class="slides" style="background-color:rgba(255,0,0,0)">
+            {{#each itemlist}}
+                <li>
+                {{#if name1}}
+                <div class="row">
+                <div class="col m1">
+                <br><br>
+    </div>
+                    <div class="col m2 offset-m4">
+    <div class="card" style="height:350px">
+<span style="margin-left:5%;letter-spacing:2px;color:green">Recommended for you!</span>
+      <div class="card-image">
+        
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url1}}">
+</video>
+
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name1}}</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc;height:62px;font-size:10pt">
+        {{description1}}
+      </div>
+      <div class="card-action center" style="height:50px">
+        
+                <a href="/cart/{{id1}}"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="#" style="color:black">$ {{price1}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="javascript:readMore({{id1}})" style="color:green">READ MORE</a>
+
+      </div>
+</div>
+    </div>
+{{/if}}
+{{#if name2}}
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+    <span style="margin-left:5%;letter-spacing:2px;color:green">Recommended for you!</span>
+      <div class="card-image">
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url2}}">
+</video>
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name2}}</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc;height:62px;font-size:10pt">
+        {{description2}}
+      </div>
+      <div class="card-action center" style="height:50px">
+        
+                <a href="/cart/{{id2}}"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="#" style="color:black">$ {{price2}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="javascript:readMore({{id2}})" style="color:green">READ MORE</a>
+
+      </div>
+
+</div>
+    </div>
+{{/if}}
+    
+    <div class="col m2">
+
+    <br><br>
+    <tr>
+    <img src="images/right1.png" onclick="right()" style="width:50px;height:50px;z-index:120">
+    </div>
+  </div>
+
+                </li>
+                {{/each}}
+                
+            </ul>
+        </div>
+</div>
+
+
+
+
+<div id="ratings" style="background-color:#cfd8dc" class="modal">
+<div class="modal-content">
+<form id="fb" onsubmit="getOld(event,'{{email}}','{{itemsString}}')" method="post">
+<table class="responsive-table striped">
+        <thead>
+          <tr>
+              <th>Item #</th>
+              <th>Item Name</th>
+              <th>Item Description</th>
+              <th>Your rating</th>
+              <th>Your comments</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each objects}}
+          <tr>
+          <td>{{item_id}}</td>
+          <td>{{item_name}}</td>
+          <td>{{item_description}}</td>
+          <td>
+          {{#if rating}}
+            <select style="display:block" name="rating{{item_id}}">
+              <option value="{{rating}}" selected hidden>{{rating}}</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+          {{/if}}
+          
+          {{#if nonrating}}
+            <select style="display:block" name="rating{{item_id}}">
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+          {{/if}}
+
+          </td>
+          <td>
+          <textarea name="comments{{item_id}}" id="comments{{item_id}}" placeholder="Enter your comments here">{{userComment}}</textarea>
+          </td>
+          </tr>
+          {{/each}}
+        </tbody>
+        
+      </table>
+          <div class="col s2 offset-s3">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black">UPDATE!</button>
+</div>
+
+      </form>
+</div>
+</div>
+
+
+
+<div id="readMore" style="background-color:#cfd8dc" class="modal">
+<div class="modal-content">
+
+<h3>Long Description</h3><div id="long_desc"></div>
+<div id="comments"><br><h5>Comments:</h5><br></div>
+
+</div>
+</div>
+
+
+
+</body>

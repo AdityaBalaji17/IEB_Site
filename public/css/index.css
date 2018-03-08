@@ -1,0 +1,57 @@
+ html {
+    font-family: roboto;
+  }
+  .card {
+ /*add inline-display*/
+ display: inline-block;
+}
+#login
+{
+    width:40%;
+    height:80%;
+    
+}
+nav {
+    height: 170px;
+    line-height: 170px;
+    background-color: #263238;
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 170px;
+    line-height: 170px;
+}
+
+nav .button-collapse i {
+    height: 170px;
+    line-height: 170px;
+}
+
+nav .brand-logo { 
+    font-size: 1.6rem; 
+}
+
+@media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 170px;
+        line-height: 170px;
+    }
+}
+
+
+@media only screen and (max-width: 601px){
+    #login{
+
+        width:80%;
+        height:100%;
+    }
+    #bname
+    {
+        visibility: hidden;
+    }
+    }
+}
+
+.slideshow-element{
+    position: absolute;
+}

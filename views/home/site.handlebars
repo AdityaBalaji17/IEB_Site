@@ -1,0 +1,233 @@
+<style>
+span.stars, span.stars span {
+    display: block;
+    background: url(stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+</style>
+<script>
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
+$(function() {
+    $('span.stars').stars();
+});
+function readMore(id)
+{
+document.getElementById("comments").innerHTML="<br><h5>Comments</h5><br>";
+var name=""+id+".txt";
+$.post("https://adityabalaji02.000webhostapp.com/2.php",{filename:name},function(data){
+
+    var comments=data.split("|");
+    document.getElementById("long_desc").innerHTML=comments[1];
+    for(i=2;i<comments.length;i++)
+    {
+      var div=document.createElement("div");
+
+      div.innerHTML=comments[i]+"<br>";
+      document.getElementById("comments").appendChild(div);
+
+    }
+
+    });
+$("#readMore").modal('open');
+}
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,interval:100000});
+                $('.slider').slider('pause');
+            });
+            function fn1(ele,url)
+            {
+            var image=new Image();
+            image.onload=function(){
+            	ele.setAttribute("src",url);
+            };
+            image.src=url;
+            }
+function left()
+{
+	$('.slider').slider('prev');
+}
+function right()
+{
+	$('.slider').slider('next');
+}
+function showSideNav()
+{
+	$('#collapse2').sideNav('show');
+}
+</script>
+<img src="images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="images/logo.png"></a>
+      <a href="/{{active_category.cid}}" class="brand-logo center" id="bname" style="letter-spacing:2px">{{active_category.cname}}</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="waves-effect waves-light btn-flat large" href="/mycart" style="background-color:#cfd8dc;color:black">Your Cart</a></li>
+        	<li><a class="waves-effect waves-light btn-flat large" href="/profile" style="background-color:#cfd8dc;color:black">{{name}}</a></li>
+         <li><a class="waves-effect waves-light btn-flat large" href="/logout" style="background-color:#cfd8dc;color:black">Logout</a></li>
+      </ul>
+      </div>
+</nav>
+<br>
+<div class="row center-align">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="showSideNav()">View All Categories</button>
+</div>
+<br><br>
+<a href="#" data-activates="slide-out" id="collapse2" class="button-collapse"></a>
+<ul id="slide-out" class="side-nav">
+    
+   
+    <li><a href="/" class="center-align">Categories</a></li>
+    {{#each categories}}
+    <li><a class="waves-effect" href={{cid}}>{{cname}}</a></li>
+    {{/each}}
+  </ul>
+  
+        <div class="slider">
+            <ul class="slides" style="background-color:rgba(255,0,0,0)">
+            {{#each itemlist}}
+                <li>
+                {{#if name1}}
+
+
+                <div class="row">
+                
+                <div class="col m1">
+      
+                <br><br>
+    <img src="images/left1.png" onclick="left()" style="width:50px;height:50px;z-index:120">
+    </div>
+                    <div class="col m2">
+    <div class="card" style="height:350px">
+  
+      <div class="card-image">
+        
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url1}}">
+</video>
+
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name1}}</span>
+      </div>
+      <span class="stars" style="margin-left:30%">{{avg_rating_num1}}</span>
+      <div class="card-content" style="background-color:#cfd8dc;height:62px;font-size:10pt">
+        {{description1}}
+      </div>
+      <div class="card-action center" style="height:50px">
+        
+                <a href="/cart/{{id1}}"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="#" style="color:black">$ {{price1}}</a>
+
+      </div>
+
+      <div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="javascript:readMore({{id1}})" style="color:green">READ MORE</a>
+
+      </div>
+
+</div>
+    </div>
+{{/if}}
+{{#if name2}}
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url2}}">
+</video>
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name2}}</span>
+      </div>
+      <span class="stars" style="margin-left:30%">{{avg_rating_num2}}</span>
+      <div class="card-content" style="background-color:#cfd8dc;height:62px;font-size:10pt">
+        {{description2}}
+      </div>
+      <div class="card-action center" style="height:50px">
+        
+                <a href="/cart/{{id2}}"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="#" style="color:black">$ {{price2}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="javascript:readMore({{id2}})" style="color:green">READ MORE</a>
+
+      </div>
+
+</div>
+    </div>
+{{/if}}
+{{#if name3}}
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url3}}">
+</video>
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name3}}</span>
+      </div>
+      <span class="stars" style="margin-left:30%">{{avg_rating_num3}}</span>
+      <div class="card-content" style="background-color:#cfd8dc;height:62px;font-size:10pt">
+        {{description3}}
+      </div>
+      <div class="card-action center" style="height:50px">
+        
+                <a href="/cart/{{id3}}"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="#" style="color:black">$ {{price3}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:30px">
+        <a href="javascript:readMore({{id3}})" style="color:green">READ MORE</a>
+
+      </div>
+
+</div>
+    </div>
+    {{/if}}
+    
+    <div class="col m2">
+
+    <br><br>
+    <tr>
+    <img src="images/right1.png" onclick="right()" style="width:50px;height:50px;z-index:120">
+    </div>
+  </div>
+
+                </li>
+                {{/each}}
+                
+            </ul>
+        </div>
+
+
+
+
+
+<div id="readMore" style="background-color:#cfd8dc" class="modal">
+<div class="modal-content">
+
+<h3>Long Description</h3><div id="long_desc"></div>
+<div id="comments"><br><h5>Comments:</h5><br></div>
+
+</div>
+</div>

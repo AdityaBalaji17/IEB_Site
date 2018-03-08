@@ -1,0 +1,359 @@
+<html>
+<head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+
+      <link rel='stylesheet' type='text/css' href='../css/style.css' />
+  <link rel='stylesheet' type='text/css' href='../css/print.css' media="print" />
+
+      <link type="text/css" rel="stylesheet" href="../css/materialize.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../css/index.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body bgcolor="#cfd8dc" onload="alertIfPaid('{{successMessage}}')">
+      <!--Import jQuery before materialize.js-->
+      <script src="https://js.braintreegateway.com/web/dropin/1.9.3/js/dropin.min.js"></script>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="../js/materialize.js"></script>
+      <script type="text/javascript" src="../js/effects.js"></script>
+  
+  <script type='text/javascript' src='../js/example.js'></script>
+
+<img src="../images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<script>
+function alertIfPaid(message)
+{
+  if(message)
+  {
+    alert(message);
+  }
+}  
+function confirm()
+{
+if(document.getElementById("address").value&&document.getElementById("email").value&&document.getElementById("phone").value)
+  document.getElementById("cust_details").submit();
+  else
+  alert("Please fill in your details");
+}
+function PrintElem(elem)
+{
+
+document.getElementById("email").innerHTML=document.getElementById("email").value;
+document.getElementById("address").innerHTML=document.getElementById("address").value;
+document.getElementById("phone").innerHTML=document.getElementById("phone").value;
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write("<html><head><title>" + document.title  + "</title>");
+
+      
+      mywindow.document.write("<style>* { margin: 0; padding: 0; }#page-wrap { width: 800px; margin: 0 auto; }textarea { border: 0; font: 14px Georgia, Serif;overflow: hidden; resize: none; }table { border-collapse: collapse; }table td, table th { border: 1px solid black; padding: 5px; }#header { height: 15px; width: 100%; margin: 20px 0; background: #222; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; letter-spacing: 20px; padding: 8px 0px; }#address { width: 250px; height: 150px; float: left; }#name { width: 250px; height: 30px; float: left; }#phone { width: 250px; height: 30px; float: left; }#customer { overflow: hidden; }#logo { text-align: right; float: right; position: relative; margin-top: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }#logo:hover, #logo.edit { border: 1px solid #000; margin-top: 0px; max-height: 125px; }#logoctr { display: none; }#logo:hover #logoctr, #logo.edit #logoctr { display: block; text-align: right; line-height: 25px; background: #eee; padding: 0 5px; }#logohelp { text-align: left; display: none; font-style: italic; padding: 10px 5px;}#logohelp input { margin-bottom: 5px; }.edit #logohelp { display: block; }.edit #save-logo, .edit #cancel-logo { display: inline; }.edit #image, #save-logo, #cancel-logo, .edit #change-logo, .edit #delete-logo { display: none; }#customer-title { font-size: 20px; font-weight: bold; float: left; }#meta { margin-top: 1px; width: 300px; float: right; }#meta td { text-align: right;  }#meta td.meta-head { text-align: left; background: #eee; }#meta td textarea { width: 100%; height: 20px; text-align: right; }#items { clear: both; width: 100%; margin: 30px 0 0 0; border: 1px solid black; }#items th { background: #eee; }#items textarea { width: 80px; height: 50px; }#items tr.item-row td { border: 0; vertical-align: top; }#items td.description { width: 300px; }#items td.item-name { width: 175px; }#items td.description textarea, #items td.item-name textarea { width: 100%; }#items td.total-line { border-right: 0; text-align: right; }#items td.total-value { border-left: 0; padding: 10px; }#items td.total-value textarea { height: 20px; background: none; }#items td.balance { background: #eee; }#items td.blank { border: 0; }#terms { text-align: center; margin: 20px 0 0 0; }#terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; letter-spacing: 10px; border-bottom: 1px solid black; padding: 0 0 8px 0; margin: 0 0 8px 0; }#terms textarea { width: 100%; text-align: center;}textarea:hover, textarea:focus, #items td.total-value textarea:hover, #items td.total-value textarea:focus, .delete:hover { background-color:#EEFF88; }.delete-wpr { position: relative; }.delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }</style>");
+
+    mywindow.document.write("</head><body >");
+    mywindow.document.write("<h1>" + document.title  + "</h1>");
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write("</body></html>");
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+function openInvoice()
+{
+  $("#invoice").modal('open');
+}
+function goBack() {
+    window.location.href="/1";
+}
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,interval:100000});
+                $('.slider').slider('pause');
+            });
+            function fn1(ele,url)
+            {
+            var image=new Image();
+            image.onload=function(){
+            	ele.setAttribute("src",url);
+            };
+            image.src=url;
+            }
+function left()
+{
+	$('.slider').slider('prev');
+}
+function right()
+{
+	$('.slider').slider('next');
+}
+function showSideNav()
+{
+	$('#collapse2').sideNav('show');
+}
+</script>
+<img src="images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="images/logo.png"></a>
+      <a href="/mycart" class="brand-logo center" id="bname" style="letter-spacing:2px">{{name}}'s Cart</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="waves-effect waves-light btn-flat large" href="/mycart" style="background-color:#cfd8dc;color:black">Your Cart</a></li>
+        	<li><a class="waves-effect waves-light btn-flat large" href="/profile" style="background-color:#cfd8dc;color:black">{{name}}</a></li>
+         <li><a class="waves-effect waves-light btn-flat large" href="/logout" style="background-color:#cfd8dc;color:black">Logout</a></li>
+      </ul>
+      </div>
+</nav>
+<br>
+<div class="row center-align s12">
+<div class="col s3 offset-s4">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="openInvoice()"><a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">BUY ALL ITEMS IN CART</a></button>
+</div>
+<div class="col s2">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="goBack()">BACK</button>
+</div>
+</div>
+
+<br><br>
+<a href="#" data-activates="slide-out" id="collapse2" class="button-collapse"></a>
+<ul id="slide-out" class="side-nav">
+    
+   
+    <li><a href="/" class="center-align">Categories</a></li>
+    {{#each categories}}
+    <li><a class="waves-effect" href={{cid}}>{{cname}}</a></li>
+    {{/each}}
+  </ul>
+        <div class="slider">
+            <ul class="slides" style="background-color:rgba(255,0,0,0)">
+            {{#each itemlist}}
+                <li>
+                {{#if name1}}
+                <div class="row">
+                
+                <div class="col m1">
+                <br><br>
+    <img src="images/left1.png" onclick="left()" style="width:50px;height:50px;z-index:120">
+    </div>
+                    <div class="col m2">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url1}}">
+</video>
+
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name1}}</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc;height:75px;font-size:11pt">
+        {{description1}}
+      </div>
+      <div class="card-action center"  style="height:50px">
+        <a href="/remove/{{id1}}"><i class="material-icons">remove_shopping_cart</i>REMOVE</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">UNIT PRICE: $ {{price1}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">QTY: {{qty1}}</a>
+
+      </div>
+</div>
+    </div>
+{{/if}}
+{{#if name2}}
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url2}}">
+</video>
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name2}}</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc;height:75px;font-size:11pt">
+        <p>{{description2}}</p>
+      </div>
+      <div class="card-action center" style="height:50px">
+        <a href="/remove/{{id2}}"><i class="material-icons">remove_shopping_cart</i>REMOVE</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">UNIT PRICE: $ {{price2}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">QTY: {{qty2}}</a>
+
+      </div>
+</div>
+    </div>
+{{/if}}
+{{#if name3}}
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/webm" src="{{image_url3}}">
+</video>
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">{{name3}}</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc;height:75px;font-size:11pt">
+        <p>{{description3}}</p>
+      </div>
+      <div class="card-action center" style="height:50px">
+        <a href="/remove/{{id3}}"><i class="material-icons">remove_shopping_cart</i>REMOVE</a>
+
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">UNIT PRICE: $ {{price3}}</a>
+
+      </div>
+      <div class="card-action center" style="background-color:#cfd8dc;height:50px">
+        <a href="#" style="color:black;font-size:11pt">QTY: {{qty3}}</a>
+
+      </div>
+</div>
+    </div>
+    {{/if}}
+    
+    <div class="col m2">
+
+    <br><br>
+    <tr>
+    <img src="images/right1.png" onclick="right()" style="width:50px;height:50px;z-index:120">
+    </div>
+  </div>
+
+                </li>
+                {{/each}}
+                
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+<div id="invoice" style="background-color:#cfd8dc" class="modal">
+<div class="modal-content">
+
+<div id="page-wrap">
+
+    <div id="header" style="height:35px">BILL</div>
+    <form id="cust_details" method="post" action="/buy">
+    <div id="identity">
+    <table cellspacing="0" cellpadding="0" style="width:20%">
+    <tr class="item-row">
+    <td>
+            <textarea id="email" name="name" style="color:black;border:1px solid red" placeholder="Enter your name here" required></textarea>
+            </td>
+            </tr>
+            <tr class="item-row">
+            <td>
+            <textarea id="address" name="address" style="color:black;border:1px solid red" placeholder="Enter your delivery address here" required></textarea>
+            </td>
+            </tr>
+            <tr class="item-row">
+            <td>
+            <textarea id="phone" name="phone" style="color:black;border:1px solid red" placeholder="Enter your phone number here" required></textarea>
+            </td>
+            </tr>
+            </table>
+      </form>
+            
+    
+</div>
+    
+    <div style="clear:both"></div>
+    
+    <div id="customer">
+
+            <textarea id="customer-title">B3 Handicrafts</textarea>
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Invoice #</td>
+                    <td><div>{{invoice_id}}</div></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Date</td>
+                    <td><div id="date">{{todayDate}}</div></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Amount Due</td>
+                    <td><div class="due">${{totalAmt}}</div></td>
+                </tr>
+
+            </table>
+    
+    </div>
+    
+    <table id="items">
+    
+      <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+      </tr>
+      {{#each rows}}
+      <tr class="item-row">
+          <td class="name">{{name}}</td>
+          <td class="description">{{description}}</td>
+          <td><div class="cost">${{price}}</div></td>
+          <td><div class="qty">{{qty}}</div></td>
+          <td><span class="price">${{cost}}</span></td>
+      
+      </tr>
+      {{/each}}
+      <tr>
+
+          <td colspan="2" class="blank"> </td>
+          <td colspan="2" class="total-line">Total</td>
+          <td class="total-value"><div id="total">${{totalAmt}}</div></td>
+      </tr>
+          
+    </table>
+    <br>
+    <div class="row center-align s12">
+    <div class="col s2 offset-s2">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="confirm()">CONFIRM</button>
+</div>
+
+<div class="col s4 offset-s2">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="PrintElem('invoice')">PRINT A COPY</button>
+</div>
+
+</div>
+
+    <div id="terms">
+      <h5>Terms</h5>
+      <div>1. This is one of the terms</div>
+      <div>2. This is another condition</div>
+    </div>
+  
+  
+  
+
+      </div>
+</div>
+    </div>
+      
+
+
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="../css/materialize.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="../css/index.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body bgcolor="#cfd8dc">
+      <!--Import jQuery before materialize.js-->
+      <script src="https://js.braintreegateway.com/web/dropin/1.9.3/js/dropin.min.js"></script>
+      <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="../js/materialize.js"></script>
+      <script type="text/javascript" src="../js/effects.js"></script>
+<img src="../images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="../images/logo.png"></a>
+      <a href="/" class="brand-logo center" id="bname" style="letter-spacing:2px">Order!</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="waves-effect waves-light btn-flat large" href="/cart" style="background-color:#cfd8dc;color:black">Your Cart</a></li>
+        	<li><a class="waves-effect waves-light btn-flat large" href="/recommendations" style="background-color:#cfd8dc;color:black">Recommendations</a></li>
+         <li><a class="waves-effect waves-light btn-flat large" href="/logout" style="background-color:#cfd8dc;color:black">Logout</a></li>
+      </ul>
+      </div>
+</nav>
+<br>
+
+<br><h5 class="center-align flow-text" style="letter-spacing:2px;color:#fafafa;opacity:0.5">Your Bill Amount is {{totalAmt}}<br><br>Please enter your payment details below</h5>
+
+
+<div id="dropin-wrapper">
+  <div id="checkout-message"></div>
+  <div id="dropin-container"></div>
+  <button id="submit-button">Submit payment</button>
+</div>
+
+<script>
+  var button = document.querySelector('#submit-button');
+
+  braintree.dropin.create({
+    // Insert your tokenization key here
+    authorization: 'sandbox_y75j2vmy_zvc3f5nbrhpdsybp',
+    container: '#dropin-container'
+  }, function (createErr, instance) {
+    button.addEventListener('click', function () {
+      instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+        // When the user clicks on the 'Submit payment' button this code will send the
+        // encrypted payment information in a variable called a payment method nonce
+        $.ajax({
+          type: 'POST',
+          url: '/checkout',
+          data: {'paymentMethodNonce': payload.nonce}
+        }).done(function(result) {
+          // Tear down the Drop-in UI
+          instance.teardown(function (teardownErr) {
+            if (teardownErr) {
+              console.error('Could not tear down Drop-in UI!');
+            } else {
+              console.info('Drop-in UI has been torn down!');
+              // Remove the 'Submit payment' button
+              $('#submit-button').remove();
+            }
+          });
+
+          if (result.success) {
+            Materialize.toast("Transaction successful!",10000,'green');
+
+            setTimeout(function(){window.location.href="/1"},3000);
+
+          } else {
+            Materialize.toast("Some error occurred.",10000,'red');
+          }
+        });
+      });
+    });
+  });
+</script>
+    </body>
+
+
+</html>

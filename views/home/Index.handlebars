@@ -1,0 +1,164 @@
+
+<script>
+function signup(event)
+{
+            event.preventDefault();
+
+           $.post("/signup", $('#signup1').serialize(), function(data) {
+        	if(data.code==400)
+        	{
+        		Materialize.toast("Looks like you've already signed up!<br>Please login to access the site",10000,'red');
+        	}
+        	else
+        	{
+        		$("#verification_code").modal('open');
+        	}
+    });
+ 	return false;
+}
+function checkCode(event)
+{
+event.preventDefault();
+
+           $.post("/checkcode", $('#verif').serialize(), function(data) {
+        	if(data.code==200)
+        	{
+        		Materialize.toast("Success! You can now log in.",10000,'green');
+        	}
+        	else
+        	{
+        		Materialize.toast("There is something wrong with your code. Please try again.",10000,'red');
+        	}
+    });
+ 	return false;	
+}
+function login(event)
+{
+	event.preventDefault();
+
+           $.post("/login", $('#login1').serialize(), function(data) {
+        	if(data.code==100)
+        	{
+        		Materialize.toast("Invalid credentials",5000,'red');
+        	}
+        	else if(data.code==400)
+        	{
+        		Materialize.toast("Please verify your account",5000,'orange');	
+        	}
+        	else
+        	{
+        		Materialize.toast("Success!",5000,'green');
+        		window.location.href="/1";	
+        	}
+    });
+ 	return false;
+}
+</script>
+<img src="images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="images/logo.png"></a>
+      <a href="/" class="brand-logo center" id="bname" style="letter-spacing:2px">B3 - Online Handicrafts Store {{message}} </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        
+         <li><a class="waves-effect waves-light btn-flat large modal-trigger" href="#login" style="background-color:#cfd8dc;color:black">Login</a></li>
+      </ul>
+
+     
+
+<a href="#" data-activates="mobile-demo" id="collapse1" class="button-collapse"><i class="material-icons">menu</i></a>
+ <ul id="mobile-demo" class="side-nav">
+        
+         <li><a class="waves-effect waves-light btn-flat large modal-trigger" href="#login" style="background-color:#cfd8dc;color:black">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+ 
+<br><h5 class="center-align flow-text" style="letter-spacing:2px;color:#fafafa;opacity:0.5">Guaranteed quality, or your money back<br><br>Sign up to get started...</h5>
+<br>
+<div class="row">
+    <form method="post" onsubmit="signup(event)" name="signup1" id="signup1" class="col s12 center-align" style="color:white">
+      <div class="row">
+        <div class="input-field col s3 offset-s3">
+          <input id="first_name" name="first_name" type="text" class="validate" required>
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s3">
+          <input id="last_name" name="last_name" type="text" class="validate" required>
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s6 offset-s3">
+          <input id="email" type="email" name="email" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6 offset-s3">
+          <input id="password" type="password" name="password" class="validate" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+<div class="row center-align">
+     <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" style="background-color:#263238;color:white"><input type ="submit" style="letter-spacing:2px;" value = "Sign Up"/></a>
+      </div>
+      </form>
+      </div>
+<div id="login" style="background-color:#cfd8dc" class="modal">
+<form method="post" onsubmit="login(event)" id="login1" action="/login">
+    <div class="modal-content">
+      <h4 class="center">Login</h4>
+    </div>
+    <div class="modal-footer" style="background-color:#cfd8dc">
+     <div class="row">
+        <div class="input-field">
+          <input id="email" name="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+        <div class="row">
+        <div class="input-field">
+          <input id="password" type="password" name="password" class="validate" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row center-align">
+     <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" style="background-color:#263238;color:white"><input type ="submit" style="letter-spacing:2px;" value = "Login"/></a>
+      </div>
+      </div>
+      
+      
+    </div>
+    </form>
+  </div>
+
+
+<div id="verification_code" style="background-color:#cfd8dc" class="modal">
+<div class="modal-content">
+      <h4 class="center">Verification Code</h4>
+      <br>
+      <p class="center">We have sent a verification code to your email account. <br> Please enter that code below to complete your account creation.</p>
+
+      <form method="post" onsubmit="checkCode(event)" name="verif" id="verif" class="col s12 center-align">
+      <div class="row center-align">
+        <div class="input-field col s4 offset-s4">
+          <input id="code1" name="code1" type="text" class="validate" required>
+          <label for="code1">Verification Code</label>
+          </div>
+          </div>
+ <div class="row center-align">
+        <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat" style="background-color:#263238;color:white"><input type ="submit" style="letter-spacing:2px;" value = "Submit"/></a>
+        
+        </div>
+      </div>
+      </form>
+    </div>
+      
+      
+    
+    </div>
+
+    

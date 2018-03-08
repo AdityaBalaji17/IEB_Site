@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/index.css"  media="screen,projection"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body bgcolor="#cfd8dc">
+      <!--Import jQuery before materialize.js-->
+      <script src="https://js.braintreegateway.com/web/dropin/1.9.3/js/dropin.min.js"></script>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.js"></script>
+      <script type="text/javascript" src="js/effects.js"></script>
+      <script>
+            $(document).ready(function () {
+                $('.slider').slider({full_width: true,interval:100000});
+                $('.slider').slider('pause');
+            });
+            function fn1(ele,url)
+            {
+            var image=new Image();
+            image.onload=function(){
+            	ele.setAttribute("src",url);
+            };
+            image.src=url;
+            }
+function left()
+{
+	$('.slider').slider('prev');
+}
+function right()
+{
+	$('.slider').slider('next');
+}
+function showSideNav()
+{
+	$('#collapse2').sideNav('show');
+}
+</script>
+<img src="images/open.jpg" style="z-index:-5;position:absolute;top:0%;left:0%;width:100%;height:95%">
+
+<div style="z-index:-4;position:absolute;top:0%;left:0%;width:100%;height:95%;opacity:0.9;background-color:black"></div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo"><img src="images/logo.png"></a>
+      <a href="/" class="brand-logo center" id="bname" style="letter-spacing:2px"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="waves-effect waves-light btn-flat large" href="/cart" style="background-color:#cfd8dc;color:black">Your Cart</a></li>
+        	<li><a class="waves-effect waves-light btn-flat large" href="/recommendations" style="background-color:#cfd8dc;color:black">Recommendations</a></li>
+         <li><a class="waves-effect waves-light btn-flat large" href="/logout" style="background-color:#cfd8dc;color:black">Logout</a></li>
+      </ul>
+      </div>
+</nav>
+<br>
+<div class="row center-align">
+<button class="waves-effect waves-light btn-flat large" style="background-color:#cfd8dc;color:black" onclick="showSideNav()">View Other Categories</button>
+</div>
+<br><br>
+<a href="#" data-activates="slide-out" id="collapse2" class="button-collapse"></a>
+<ul id="slide-out" class="side-nav">
+    
+   
+    <li><a href="/" class="center-align">Categories</a></li>
+    <li><a class="waves-effect" href=1>Home Decor</a></li>
+    <li><a class="waves-effect" href=2>Tableware</a></li>
+    <li><a class="waves-effect" href=3>Stationery</a></li>
+    <li><a class="waves-effect" href=4>Toys</a></li>
+  </ul>
+        <div class="slider">
+            <ul class="slides" style="background-color:rgba(255,0,0,0)">
+                <li>
+                <div class="row">
+                
+                <div class="col m1">
+                <br><br>
+    <img src="images/left1.png" onclick="left()" style="width:50px;height:50px;z-index:120">
+    </div>
+                    <div class="col m2">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/mp4" src="1.mp4">
+</video>
+
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">Antique Clock</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc">
+        <p>Prepared by master artisans of Jaipur. Ideal fro gifts</p>
+      </div>
+      <div class="card-action">
+        <a href="#" style="float:right"><i class="material-icons">payment</i>BUY</a>
+                <a href="#"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;">
+        <a href="#" style="color:black">$ 900</a>
+
+      </div>
+</div>
+    </div>
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <img src="2.gif" style="width:100%;height:170px">
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">Gemstone Keychain</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc">
+        <p>Handcrafted keychain from Ahmedabad</p>
+      </div>
+      <div class="card-action">
+        <a href="#" style="float:right"><i class="material-icons">payment</i>BUY</a>
+                <a href="#"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;">
+        <a href="#" style="color:black">$ 75</a>
+
+      </div>
+</div>
+    </div>
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <img src="1.gif" style="width:100%;height:170px">
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">Portrait</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc">
+        <p>Tanjore Painting</p>
+      </div>
+      <div class="card-action">
+        <a href="#" style="float:right"><i class="material-icons">payment</i>BUY</a>
+                <a href="#"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;">
+        <a href="#" style="color:black">$ 1000</a>
+
+      </div>
+</div>
+    </div>
+    
+    <div class="col m2">
+
+    <br><br>
+    <tr>
+    <img src="images/right1.png" onclick="right()" style="width:50px;height:50px;z-index:120">
+    </div>
+  </div>
+
+                </li>
+                <li>
+                <div class="row">
+                
+                <div class="col m1">
+                <br><br>
+    <img src="images/left1.png" onclick="left()" style="width:50px;height:50px;z-index:120">
+    </div>
+                    <div class="col m2">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        
+        <video autoplay loop muted style="width:100%;height:170px;image-fit:fill">
+<source type="video/mp4" src="1.mp4">
+</video>
+
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">Abc</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc">
+        <p>This is a test item</p>
+      </div>
+      <div class="card-action">
+        <a href="#" style="float:right"><i class="material-icons">payment</i>BUY</a>
+                <a href="#"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;">
+        <a href="#" style="color:black">$ 10</a>
+
+      </div>
+</div>
+    </div>
+     <div class="col m2 offset-m1">
+    <div class="card" style="height:350px">
+      <div class="card-image">
+        <img src="7.gif" style="width:100%;height:170px">
+        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">Def</span>
+      </div>
+      <div class="card-content" style="background-color:#cfd8dc">
+        <p>Yet another test item</p>
+      </div>
+      <div class="card-action">
+        <a href="#" style="float:right"><i class="material-icons">payment</i>BUY</a>
+                <a href="#"><i class="material-icons">shopping_cart</i>CART</a>
+      </div>
+<div class="card-action center" style="background-color:#cfd8dc;">
+        <a href="#" style="color:black">$ 23</a>
+
+      </div>
+</div>
+    </div>
+    
+    <div class="col m2">
+
+    <br><br>
+    <tr>
+    <img src="images/right1.png" onclick="right()" style="width:50px;height:50px;z-index:120">
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+
+
+    </body>
+
+</html>
